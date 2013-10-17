@@ -1,3 +1,6 @@
+FILE = postmessage.js
+MINFILE = postmessage.min.js
+
 build: components
 	@./node_modules/.bin/component-build \
 		--standalone postmessage \
@@ -12,6 +15,11 @@ test:
 	./test/index.html
 
 clean:
-	rm -fr postmessage.js components
+	rm -fr $(FILE) components
 
-.PHONY: clean test
+min:
+	@./node_modules/.bin/uglifyjs $(FILE) \
+	 	--compress \
+	 	> $(MINFILE)
+
+.PHONY: clean test build min
