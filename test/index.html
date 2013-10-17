@@ -1,0 +1,27 @@
+<html>
+  <head>
+    <title>postmessage tests</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <link rel="stylesheet" href="vendor/mocha.css" />
+  </head>
+  <body>
+    <div id="mocha"></div>
+    <script src="vendor/mocha.js"></script>
+    <script>
+      mocha.ui('bdd');
+      mocha.reporter('html');
+    </script>
+    <script src="vendor/expect.js"></script>
+    <script src="../postmessage.js"></script>    
+    <script src="test.js"></script>
+    <script>
+      if (window.mochaPhantomJS) {
+        mochaPhantomJS.run();
+      }
+      else {
+        mocha.run();
+      }
+    </script>
+
+  </body>
+</html>

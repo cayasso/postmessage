@@ -1,0 +1,18 @@
+{
+  "name": "postmessage",
+  "version": "0.0.0",
+  "description": "Cross domain messaging made easy with postMessage.",
+  "repo": "cayasso/postmessage",
+  "main": "index.js",
+  "scripts": [
+    "lib/pub.js",
+    "lib/sub.js",
+    "lib/index.js",
+    "index.js"
+  ],
+  "dependencies": {
+    "component/bind": "*"
+  },
+  "license": "MIT",
+  "remotes": []
+}
