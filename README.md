@@ -107,7 +107,7 @@ pub.defaults();
 console.log(pub.origin()); // -> '*'
 ```
 
-### pub.send(data, [target, [origin]])
+### pub.send(data, [origin, [target]])
 
 Send a message to a target window. You can pass the target and origin as second 
 and third parametters correspondingly.
@@ -117,11 +117,12 @@ and third parametters correspondingly.
 // data is serialized by JSON
 pub.send({ hello: 'world' });
 
-// or with a target window:
-pub.send({ hello: 'world' }, targetWindow);
-
 // or with specifying the origin:
-pub.send({ hello: 'world' }, targetWindow, 'http://example.com');
+pub.send({ hello: 'world' }, 'http://example.com');
+
+// or with a target window:
+pub.send({ hello: 'world' }, 'http://example.com', targetWindow);
+
 ```
 
 ### Sub([window])
