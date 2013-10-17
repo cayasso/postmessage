@@ -109,18 +109,70 @@ Send a message to a target window. You can pass the target and origin as second
 and third parametters correspondingly.
 
 ```javascript
+
+// data is serialized by JSON
 pub.send({ hello: 'world' });
 
-or with a target window:
+// or with a target window:
 
 pub.send({ hello: 'world' }, targetWindow);
 
-or with specifying the origin:
+// or with specifying the origin:
 
 pub.send({ hello: 'world' }, targetWindow, 'http://example.com');
 ```
 
 ### Sub([window])
+
+Create a subscriber instance, a window can be passed as first argument, if none the default 
+window will be `window`.
+
+```javascript
+var Sub = postmessage('sub');
+var sub = Sub(myWindow);
+```
+
+### sub.origin(domain)
+
+Add origin domains to white list.
+
+```javascript
+sub
+.origin('http://example.com')
+.origin('http://simple.com')
+.origin('http://hello.com');
+```
+
+### sub.bind(fn)
+
+Bind or subscribe to post messages for the specified window.
+
+```javascript
+sub
+.bind(function(message, event){
+  console.log(message);
+});
+```
+
+### sub.unbind([fn])
+
+Unbind or unsubscribe from window post messages. If no funciton is passed it will unbind all listeners.
+
+```javascript
+// unbind by passing the pointer function
+sub.unbind(myFunction);
+
+// unbind all listeners
+sub.unbind();
+```
+
+### sub.destroy()
+
+This unbind all listeners from subscriber and then destroy it.
+
+```javascript
+sub.destroy();
+```
 
 ## Run tests
 
