@@ -250,6 +250,7 @@ function Publisher(target) {
  */
 
 Publisher.prototype.defaults = function defaults() {
+  this.delay = 100;
   this._origin = "*";
   this._target = window.parent;
   return this;
@@ -295,12 +296,29 @@ Publisher.prototype.origin = function origin(origin) {
 
 Publisher.prototype.send =
 Publisher.prototype.publish = function send(data, target, origin) {
-  var pub = this;
+  var pub = this, target = pub._target;
   data = JSON.stringify(data);
-  this.target(target).origin(origin);
-  setTimeout(function(){
-    pub._target.postMessage(data, pub._origin);
-  }, 0);
+  pub.target(target).origin(origin);
+
+  // So we need to make sure that the target window is already
+  // loaded before sending a message, this can be done with the
+  // frameElement of the target, this only happen when the target
+  // window to post to is a child of the main window, if its from
+  // the child to the parent window this is already loaded so no problem
+  // sending message back.
+  if (!pub.ready && target.frameElement) {
+    pub.delay = 0;
+    target.frameElement.onload = send;
+  } else {
+    setTimeout(send, pub.delay);
+    pub.delay = 0;
+  }
+
+  function send (){
+    target.postMessage(data, pub._origin);
+    if (!pub.ready) pub.ready = true;
+  }
+
   return this;
 };
 });
@@ -424,7 +442,7 @@ Subscriber.prototype.matches = function matches(origin) {
  */
 
 Subscriber.prototype.bind =
-Subscriber.prototype.subscribe = function bind(fn) {
+Subscriber.prototype.subscribe = function binding(fn) {
   if ('function' === typeof fn) {
     fn.id = this.fns.length + 1;
     this.fns.push(fn);
@@ -441,7 +459,7 @@ Subscriber.prototype.subscribe = function bind(fn) {
  */
 
 Subscriber.prototype.unbind =
-Subscriber.prototype.unsubscribe = function unbind(fn) {
+Subscriber.prototype.unsubscribe = function unbinding(fn) {
   if (!arguments.length) {
     this.fns = [];
   } else {
@@ -465,7 +483,7 @@ Subscriber.prototype.unsubscribe = function unbind(fn) {
  * @api public
  */
 
-Subscriber.prototype.destroy = function destroy() {
+Subscriber.prototype.destroy = function destroying() {
   this._unbind();
   this.defaults();
   return this;
