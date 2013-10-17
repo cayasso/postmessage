@@ -31,6 +31,8 @@ sub.bind(function(message){
   console.log(message); // -> THANK YOU
 });
 
+pub.send('HOOOOOLA');
+
 ```
 
 ### On the iframe
@@ -39,7 +41,9 @@ sub.bind(function(message){
 var pub = postmessage('pub')();
 var sub = postmessage('sub')();
 
-sub.subscribe(function(message){
+sub.subscribe(function(message, event){
+  console.log(message); // -> HOOOOOLA
+
   // send back to parent window
   pub.send('THANK YOU');
 });
