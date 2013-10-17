@@ -1,3 +1,10 @@
+  try {
+    postmessage = require('../postmessage');
+    expect = require('expect.js');
+    window = { addEventListener: function(){}};
+  } catch (e) {
+  }
+
   var Pub = postmessage.Pub
   , Sub = postmessage.Sub;
 

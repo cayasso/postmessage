@@ -114,11 +114,9 @@ and third parametters correspondingly.
 pub.send({ hello: 'world' });
 
 // or with a target window:
-
 pub.send({ hello: 'world' }, targetWindow);
 
 // or with specifying the origin:
-
 pub.send({ hello: 'world' }, targetWindow, 'http://example.com');
 ```
 
