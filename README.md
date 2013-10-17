@@ -1,7 +1,6 @@
 # PostMessage
 
 [![Build Status](https://travis-ci.org/cayasso/postmessage.png?branch=master)](https://travis-ci.org/cayasso/postmessage)
-[![NPM version](https://badge.fury.io/js/postmessage.png)](http://badge.fury.io/js/postmessage)
 
 Cross domain messaging made easy with `window.postMessage`.
 
@@ -136,11 +135,6 @@ Then run the test like this:
 ``` bash
 $ make test
 ```
-
-## Other plugins
-
- * [primus-rooms](https://github.com/cayasso/primus-rooms)
- * [primus-multiplex](https://github.com/cayasso/primus-multiplex)
 
 ## License
 
