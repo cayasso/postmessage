@@ -27,14 +27,10 @@ function require(path, parent, orig) {
   // perform real require()
   // by invoking the module's
   // registered function
-  if (!module._resolving && !module.exports) {
-    var mod = {};
-    mod.exports = {};
-    mod.client = mod.component = true;
-    module._resolving = true;
-    module.call(this, mod.exports, require.relative(resolved), mod);
-    delete module._resolving;
-    module.exports = mod.exports;
+  if (!module.exports) {
+    module.exports = {};
+    module.client = module.component = true;
+    module.call(this, module.exports, require.relative(resolved), module);
   }
 
   return module.exports;
@@ -255,7 +251,7 @@ function Publisher(target) {
 
 Publisher.prototype.defaults = function defaults() {
   this._origin = "*";
-  this._target = window;
+  this._target = window.parent;
   return this;
 };
 
@@ -521,7 +517,9 @@ PostMessage.Sub = pm.sub;
 require.alias("component-bind/index.js", "postmessage/deps/bind/index.js");
 require.alias("component-bind/index.js", "bind/index.js");
 
-require.alias("postmessage/index.js", "postmessage/index.js");if (typeof exports == "object") {
+require.alias("postmessage/index.js", "postmessage/index.js");
+
+if (typeof exports == "object") {
   module.exports = require("postmessage");
 } else if (typeof define == "function" && define.amd) {
   define(function(){ return require("postmessage"); });
