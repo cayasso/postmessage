@@ -1,6 +1,6 @@
 {
   "name": "postmessage-component",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "description": "Cross domain messaging made easy with postMessage",
   "author": "Jonathan Brumley <cayasso@gmail.com>",
   "homepage": "https://github.com/cayasso/postmessage",

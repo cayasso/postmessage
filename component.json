@@ -1,6 +1,6 @@
 {
   "name": "postmessage",
-  "version": "0.1.0",
+  "version": "0.1.2",
   "description": "Cross domain messaging made easy with postMessage.",
   "repo": "cayasso/postmessage",
   "main": "index.js",
