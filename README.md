@@ -24,8 +24,8 @@ Or you can just grab the postmessage.js bundle file and include it in your page:
 
 ```javascript
 var target = document.getElementById('myiframe').contentWindow;
-var pub = postmessage('pub')();
-var sub = postmessage('sub')(target);
+var pub = postmessage('pub')(target);
+var sub = postmessage('sub')();
 
 sub.bind(function(message){
   console.log(message); // -> THANK YOU
@@ -38,7 +38,7 @@ pub.send('HOOOOOLA');
 ### On the iframe
 
 ```javascript
-var pub = postmessage('pub')();
+var pub = postmessage('pub')(parent);
 var sub = postmessage('sub')();
 
 sub.subscribe(function(message, event){
